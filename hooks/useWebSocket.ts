@@ -1,10 +1,8 @@
 import { useEffect, useRef, useCallback } from "react";
 import { PriceUpdate } from "@/lib/types";
 
-/**
- * Custom hook for WebSocket connection with price updates
- * Mocks real-time price updates for tokens
- */
+// Custom hook for WebSocket connection with price updates
+
 export function useWebSocket(
   onMessage: (update: PriceUpdate) => void,
   isConnected: boolean
@@ -13,13 +11,11 @@ export function useWebSocket(
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const connect = useCallback(() => {
-    // Mock WebSocket using setInterval
-    // In production, this would be a real WebSocket connection
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
 
-    // Generate realistic token IDs based on actual tokens from the image
+    // Generate realistic token IDs for testing
     const tokenIds = [
       "new-pairs-MEMECHASE-0",
       "new-pairs-STEVE-1",
@@ -44,7 +40,7 @@ export function useWebSocket(
       // Generate realistic price change (-2% to +2% for quick updates)
       const priceChangePercent = (Math.random() - 0.5) * 4;
       
-      // Get base values (in a real app, these would come from the store)
+      // Get base values for testing
       const basePrice = Math.random() * 0.001 + 0.0001;
       const newPrice = basePrice * (1 + priceChangePercent / 100);
       const baseMarketCap = Math.random() * 1000000 + 100000;
@@ -67,7 +63,7 @@ export function useWebSocket(
       };
 
       onMessage(update);
-    }, 500); // Update every 500ms for faster updates
+    }, 500);
   }, [onMessage]);
 
   const disconnect = useCallback(() => {

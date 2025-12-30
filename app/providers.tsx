@@ -11,9 +11,7 @@ interface ProvidersProps {
   children: React.ReactNode;
 }
 
-/**
- * Providers component - Wraps app with Redux, React Query, and Error Boundary
- */
+// Providers component - Wraps app with Redux, React Query, and Error Boundary
 export function Providers({ children }: ProvidersProps) {
   return (
     <ErrorBoundary>
@@ -25,4 +23,3 @@ export function Providers({ children }: ProvidersProps) {
     </ErrorBoundary>
   );
 }
-

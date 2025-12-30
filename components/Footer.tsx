@@ -6,7 +6,6 @@ import {
   Wallet,
   Twitter,
   Bell,
-  HelpCircle,
   MessageCircle,
   Palette,
   FileText,
@@ -45,10 +44,6 @@ const notificationIcons = {
   files: FileText,
 };
 
-/**
- * Footer component - Bottom navigation and status indicators
- * Features: Wallet, social links, connection status, global settings
- */
 const Footer = memo(() => {
   const isConnected = useAppSelector(
     (state: RootState) => state.app.isConnected
@@ -58,7 +53,7 @@ const Footer = memo(() => {
     <>
       <footer className="fixed bottom-0 z-50 w-full border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 overflow-x-auto overflow-y-visible">
         <div className="flex h-16 items-center justify-between px-4">
-          {/* Left Section - Preset and Controls */}
+          {/* Left Section */}
           <div className="flex items-center gap-4">
             <Button variant="outline" size="sm" className="h-9">
               PRESET 1
@@ -92,7 +87,7 @@ const Footer = memo(() => {
             </TooltipProvider>
           </div>
 
-          {/* Middle Section - Navigation and PnL */}
+          {/* Middle Section */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-4">
               <TooltipProvider>
@@ -129,7 +124,7 @@ const Footer = memo(() => {
             </div>
           </div>
 
-          {/* Right Section - Status and Links */}
+          {/* Right Section */}
           <div className="flex items-center gap-4">
             <div
               className={cn(

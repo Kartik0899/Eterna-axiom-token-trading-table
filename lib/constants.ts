@@ -1,32 +1,6 @@
 import { Token, TokenCategory } from "./types";
 
-/**
- * Format time ago string
- */
-function formatTimeAgo(ms: number): string {
-  const seconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  
-  if (seconds < 60) return `${seconds}s`;
-  if (minutes < 60) return `${minutes}m`;
-  if (hours < 24) return `${hours}h ${minutes % 60}m`;
-  return `${Math.floor(hours / 24)}d ${hours % 24}h`;
-}
-
-/**
- * Generate percentage changes array
- */
-function generatePercentageChanges(): number[] {
-  return Array.from({ length: 4 }, () => {
-    const change = (Math.random() - 0.3) * 200; // Bias towards positive
-    return Math.round(change);
-  });
-}
-
-/**
- * Token data matching the image
- */
+// Token data for testing
 const TOKEN_DATA: Record<TokenCategory, Array<Omit<Token, "id" | "category" | "createdAt">>> = {
   "new-pairs": [
     {
@@ -288,9 +262,7 @@ const TOKEN_DATA: Record<TokenCategory, Array<Omit<Token, "id" | "category" | "c
   ],
 };
 
-/**
- * Generate dummy token data matching the image
- */
+// Generate dummy token data for testing
 export function generateDummyTokens(category: TokenCategory, count?: number): Token[] {
   const tokens = TOKEN_DATA[category] || [];
   const limit = count || tokens.length;
@@ -299,13 +271,11 @@ export function generateDummyTokens(category: TokenCategory, count?: number): To
     ...token,
     id: `${category}-${token.symbol}-${index}`,
     category,
-    createdAt: Date.now() - (index * 1000), // Stagger creation times
+    createdAt: Date.now() - (index * 1000),
   }));
 }
 
-/**
- * Default column states
- */
+// Default column states
 export const DEFAULT_COLUMN_STATE = {
   activePriority: "P1" as const,
   sortBy: "price" as const,

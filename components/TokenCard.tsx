@@ -4,12 +4,7 @@ import React, { memo, useState, useEffect } from "react";
 import { Token } from "@/lib/types";
 import { formatCurrency, formatPercentage, cn } from "@/lib/utils";
 import { useAppSelector } from "@/store/hooks";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { TooltipProvider } from "./ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import {
   Users,
@@ -29,9 +24,7 @@ interface TokenCardProps {
   onTokenClick?: (token: Token) => void;
 }
 
-/**
- * Truncate address to show first few and last few characters
- */
+// Truncate address to show first few and last few characters
 function truncateAddress(
   address: string,
   start: number = 5,
@@ -41,10 +34,6 @@ function truncateAddress(
   return `${address.slice(0, start)}...${address.slice(-end)}`;
 }
 
-/**
- * TokenCard component - Displays individual token information matching the image design
- * Features: Logo with border, metrics, percentage boxes with icons, hover effects
- */
 const TokenCard = memo(({ token, onTokenClick }: TokenCardProps) => {
   const storedTokens = useAppSelector((state) => state.tokens.tokens);
   const currentToken = storedTokens[token.id] || token;
@@ -73,12 +62,12 @@ const TokenCard = memo(({ token, onTokenClick }: TokenCardProps) => {
       : "migrat";
   const truncatedAddress = truncateAddress(currentToken.pairAddress, 5, 4);
 
-  // Icons for percentage boxes (matching image: trending, chef hat, target, none)
+  // Icons for percentage boxes
   const percentageIcons = [
     <TrendingUp key="trend" className="h-3 w-3" />,
     <UtensilsCrossed key="chef" className="h-3 w-3" />,
     <Crosshair key="target" className="h-3 w-3" />,
-    null, // No icon for 4th box
+    null,
   ];
 
   const handleCopyAddress = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -100,18 +89,17 @@ const TokenCard = memo(({ token, onTokenClick }: TokenCardProps) => {
             )}
           >
             <div className="flex items-start gap-3">
-              {/* Left: Logo with border */}
+              {/* Left */}
               <div className="flex-shrink-0">
                 <div className="w-14 h-14 rounded-lg border-2 border-blue-500/60 bg-white/5 flex items-center justify-center overflow-hidden">
                   <div className="text-2xl">{currentToken.logo || "🪙"}</div>
                 </div>
-                {/* Truncated address below logo */}
                 <p className="text-[10px] text-muted-foreground mt-1.5 text-center leading-tight">
                   {categoryPrefix}... {truncatedAddress.slice(-4)}
                 </p>
               </div>
 
-              {/* Middle: Token info and metrics */}
+              {/* Middle */}
               <div className="flex-1 min-w-0">
                 {/* Token name and description */}
                 <div className="flex items-center gap-2 mb-0.5">
@@ -131,12 +119,12 @@ const TokenCard = memo(({ token, onTokenClick }: TokenCardProps) => {
                   )}
                 </div>
 
-                {/* Timer in green */}
+                {/* Timer */}
                 <div className="text-sm font-medium text-green-500 mb-2">
                   {currentToken.age}
                 </div>
 
-                {/* Icons and numbers row */}
+                {/* Icons and numbers */}
                 <div className="flex items-center gap-2.5 mb-1.5 text-xs text-muted-foreground">
                   <User className="h-3.5 w-3.5" />
                   <Search className="h-3.5 w-3.5" />
@@ -153,13 +141,7 @@ const TokenCard = memo(({ token, onTokenClick }: TokenCardProps) => {
                   </div>
                 </div>
 
-                {/* Crown with 0 */}
-                {/* <div className="flex items-center gap-1 mb-2.5 text-xs text-muted-foreground">
-                  <Crown className="h-3 w-3" />
-                  <span>{currentToken.rank}</span>
-                </div> */}
-
-                {/* Percentage boxes at bottom */}
+                {/* Percentage boxes */}
                 <div className="flex gap-1 flex-wrap">
                   {currentToken.percentageChanges.map((change, index) => {
                     const isPositive = change > 0;
@@ -184,7 +166,7 @@ const TokenCard = memo(({ token, onTokenClick }: TokenCardProps) => {
                 </div>
               </div>
 
-              {/* Right: Financial metrics stacked */}
+              {/* Right */}
               <div className="flex-shrink-0 text-right space-y-1.5">
                 <div className="text-xs">
                   <span className="text-muted-foreground">MC </span>

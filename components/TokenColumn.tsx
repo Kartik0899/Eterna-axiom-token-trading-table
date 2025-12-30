@@ -18,7 +18,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { ArrowUpDown, Zap, Filter, ArrowRightLeft } from "lucide-react";
+import { Zap, ArrowRightLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface TokenColumnProps {
@@ -26,7 +26,7 @@ interface TokenColumnProps {
   tokens: Token[];
   isLoading?: boolean;
   onTokenClick?: (token: Token) => void;
-  hideHeader?: boolean; // Hide header on mobile/tablet when using tabs
+  hideHeader?: boolean;
 }
 
 const COLUMN_TITLES: Record<TokenCategory, string> = {
@@ -44,10 +44,6 @@ const SORT_OPTIONS: { label: string; value: SortOption }[] = [
   { label: "Market Cap", value: "marketCap" },
 ];
 
-/**
- * TokenColumn component - Displays a column of tokens with sorting and filtering
- * Features: Priority tabs, sorting, loading states
- */
 const TokenColumn = memo(
   ({
     category,
@@ -116,29 +112,27 @@ const TokenColumn = memo(
       }
     };
 
-    // Get token count for display
+    // Get token count
     const tokenCount = sortedTokens.length;
 
     return (
       <div className="flex flex-col h-full w-full lg:min-w-[300px]">
-        {/* Column Header - Bordered container matching image - Hidden on mobile when using tabs */}
+        {/* Column Header */}
         {!hideHeader && (
           <div className="mb-4 border border-border/50 rounded-lg bg-card/30 p-2.5">
             <div className="flex items-center gap-3">
-              {/* Left: Title */}
+              {/* Left */}
               <h2 className="text-sm font-medium text-foreground whitespace-nowrap">
                 {COLUMN_TITLES[category]}
               </h2>
 
               <div className="flex items-center gap-3 ml-auto">
                 <div className="flex items-center border rounded-full">
-                  {/* Count button with lightning bolt and logo */}
                   <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-l-full rounded-r-none  border-r-2 border-border/50">
                     <Zap className="h-3.5 w-3.5 text-foreground" />
                     <span className="text-xs font-medium text-foreground">
                       {tokenCount}
                     </span>
-                    {/* Solana logo - three horizontal bars with gradient */}
                     <div className="flex items-center gap-0.5 ml-4 -rotate-90">
                       <div className="h-2.5 w-[2px] bg-linear-to-b from-purple-400 via-blue-400 to-green-400 rounded-full" />
                       <div className="h-2.5 w-[2px] bg-linear-to-b from-purple-400 via-blue-400 to-green-400 rounded-full" />
@@ -146,7 +140,6 @@ const TokenColumn = memo(
                     </div>
                   </div>
 
-                  {/* Priority Tabs - Rounded button */}
                   <div className="flex items-center gap-0.5 py-1">
                     {PRIORITIES.map((priority) => (
                       <button
@@ -165,7 +158,7 @@ const TokenColumn = memo(
                   </div>
                 </div>
 
-                {/* Right: Filter icon */}
+                {/* Right */}
                 <div className="ml-auto">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -201,13 +194,7 @@ const TokenColumn = memo(
         )}
 
         {/* Token List */}
-        <div
-          className="flex-1 space-y-3 overflow-y-auto scrollbar-thin overflow-x-hidden h-[60vh] max-h-[60vh]"
-          // style={{
-          //   height: `calc(-240px + 100vh)`,
-          //   maxHeight: `calc(-240px + 100vh)`,
-          // }}
-        >
+        <div className="flex-1 space-y-3 overflow-y-auto scrollbar-thin overflow-x-hidden h-[60vh] max-h-[60vh]">
           {isLoading ? (
             <>
               {[...Array(3)].map((_, i) => (

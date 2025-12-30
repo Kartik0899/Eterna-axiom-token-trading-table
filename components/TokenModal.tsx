@@ -18,10 +18,6 @@ interface TokenModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-/**
- * TokenModal component - Detailed token information modal
- * Features: Full token details, formatted data display
- */
 const TokenModal = memo(({ token, open, onOpenChange }: TokenModalProps) => {
   if (!token) return null;
 
@@ -29,8 +25,8 @@ const TokenModal = memo(({ token, open, onOpenChange }: TokenModalProps) => {
   const priceChangeClass = isPositive ? "text-green-500" : "text-red-500";
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+    <Dialog open={open} onOpenChange={onOpenChange} modal={true}>
+      <DialogContent className="max-w-2xl z-60">
         <DialogHeader>
           <DialogTitle className="text-2xl">
             {token.name} ({token.symbol})
@@ -46,12 +42,21 @@ const TokenModal = memo(({ token, open, onOpenChange }: TokenModalProps) => {
             <h3 className="text-lg font-semibold">Price Information</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Current Price</p>
-                <p className="text-2xl font-bold">${formatCurrency(token.price)}</p>
+                <p className="text-sm text-muted-foreground mb-1">
+                  Current Price
+                </p>
+                <p className="text-2xl font-bold">
+                  ${formatCurrency(token.price)}
+                </p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">24h Change</p>
-                <div className={cn("flex items-center gap-2 text-xl font-semibold", priceChangeClass)}>
+                <div
+                  className={cn(
+                    "flex items-center gap-2 text-xl font-semibold",
+                    priceChangeClass
+                  )}
+                >
                   {isPositive ? (
                     <TrendingUp className="h-5 w-5" />
                   ) : (
@@ -69,19 +74,27 @@ const TokenModal = memo(({ token, open, onOpenChange }: TokenModalProps) => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">24h Volume</p>
-                <p className="text-lg font-medium">${formatCurrency(token.volume24h, 0)}</p>
+                <p className="text-lg font-medium">
+                  ${formatCurrency(token.volume24h, 0)}
+                </p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Liquidity</p>
-                <p className="text-lg font-medium">${formatCurrency(token.liquidity, 0)}</p>
+                <p className="text-lg font-medium">
+                  ${formatCurrency(token.liquidity, 0)}
+                </p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Market Cap</p>
-                <p className="text-lg font-medium">${formatCurrency(token.marketCap, 0)}</p>
+                <p className="text-lg font-medium">
+                  ${formatCurrency(token.marketCap, 0)}
+                </p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Category</p>
-                <p className="text-lg font-medium capitalize">{token.category.replace("-", " ")}</p>
+                <p className="text-lg font-medium capitalize">
+                  {token.category.replace("-", " ")}
+                </p>
               </div>
             </div>
           </div>
@@ -102,4 +115,3 @@ const TokenModal = memo(({ token, open, onOpenChange }: TokenModalProps) => {
 TokenModal.displayName = "TokenModal";
 
 export default TokenModal;
-

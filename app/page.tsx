@@ -17,10 +17,7 @@ import { Button } from "@/components/ui/button";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-/**
- * Main Pulse page component
- * Features: Three token columns, real-time updates, modal interactions
- */
+// Main Pulse page component
 export default function PulsePage() {
   const dispatch = useAppDispatch();
   const [modalOpen, setModalOpen] = useState(false);
@@ -99,6 +96,13 @@ export default function PulsePage() {
     },
     [dispatch]
   );
+
+  // Open modal when token is selected from search or other sources
+  useEffect(() => {
+    if (selectedToken && !modalOpen) {
+      setModalOpen(true);
+    }
+  }, [selectedToken, modalOpen]);
 
   return (
     <TooltipProvider>
@@ -196,14 +200,17 @@ export default function PulsePage() {
           </div>
         </main>
 
-        {/* Footer */}
         <Footer />
 
-        {/* Token Modal */}
         <TokenModal
           token={selectedToken}
           open={modalOpen}
-          onOpenChange={setModalOpen}
+          onOpenChange={(open) => {
+            setModalOpen(open);
+            if (!open) {
+              dispatch(setSelectedToken(null));
+            }
+          }}
         />
       </div>
     </TooltipProvider>

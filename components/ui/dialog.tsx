@@ -39,6 +39,22 @@ const DialogContent = React.forwardRef<
         className
       )}
       {...props}
+      onPointerDownOutside={(e) => {
+        // Prevent closing if clicking on another dialog
+        const target = e.target as HTMLElement;
+        if (target.closest('[role="dialog"]')) {
+          e.preventDefault();
+        }
+      }}
+      onEscapeKeyDown={(e) => {
+        // Only close if this is the topmost dialog
+        const dialogs = document.querySelectorAll('[role="dialog"]');
+        const thisDialog = e.currentTarget;
+        const isTopmost = Array.from(dialogs).pop() === thisDialog;
+        if (!isTopmost) {
+          e.preventDefault();
+        }
+      }}
     >
       {children}
       <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">

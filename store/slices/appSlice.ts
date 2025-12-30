@@ -6,6 +6,7 @@ interface AppState {
   columns: Record<TokenCategory, ColumnState>;
   selectedToken: Token | null;
   isConnected: boolean;
+  searchQuery: string;
 }
 
 const initialState: AppState = {
@@ -16,6 +17,7 @@ const initialState: AppState = {
   },
   selectedToken: null,
   isConnected: false,
+  searchQuery: "",
 };
 
 const appSlice = createSlice({
@@ -46,6 +48,9 @@ const appSlice = createSlice({
     setConnectionStatus: (state, action: PayloadAction<boolean>) => {
       state.isConnected = action.payload;
     },
+    setSearchQuery: (state, action: PayloadAction<string>) => {
+      state.searchQuery = action.payload;
+    },
   },
 });
 
@@ -55,6 +60,7 @@ export const {
   setSortDirection,
   setSelectedToken,
   setConnectionStatus,
+  setSearchQuery,
 } = appSlice.actions;
 
 export default appSlice.reducer;

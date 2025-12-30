@@ -13,10 +13,8 @@ interface State {
   error: Error | null;
 }
 
-/**
- * Error Boundary component for catching and handling React errors
- * Provides graceful error handling with fallback UI
- */
+// Error Boundary component for catching and handling React errors
+// Provides graceful error handling with fallback UI
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -59,4 +57,3 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
-

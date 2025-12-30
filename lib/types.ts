@@ -1,6 +1,5 @@
-/**
- * Token data structure
- */
+// Token data structure
+
 export interface Token {
   id: string;
   symbol: string;
@@ -13,8 +12,7 @@ export interface Token {
   pairAddress: string;
   createdAt: number;
   category: TokenCategory;
-  // Additional fields from image
-  logo?: string; // Emoji or icon identifier
+  logo?: string;
   holders: number;
   transactions: number;
   rank: number;
@@ -24,29 +22,19 @@ export interface Token {
   age: string; // Formatted age like "4s", "11h 24m", "25m"
 }
 
-/**
- * Token categories for different columns
- */
+// Token categories for different columns
 export type TokenCategory = "new-pairs" | "final-stretch" | "migrated";
 
-/**
- * Priority levels for tokens
- */
+// Priority levels for tokens
 export type Priority = "P1" | "P2" | "P3";
 
-/**
- * Sort options
- */
+// Sort options
 export type SortOption = "price" | "volume" | "liquidity" | "change" | "marketCap";
 
-/**
- * Sort direction
- */
+// Sort direction
 export type SortDirection = "asc" | "desc";
 
-/**
- * WebSocket message for price updates
- */
+// WebSocket message for price updates
 export interface PriceUpdate {
   tokenId: string;
   price: number;
@@ -57,18 +45,14 @@ export interface PriceUpdate {
   timestamp: number;
 }
 
-/**
- * Column state for each category
- */
+// Column state for each category
 export interface ColumnState {
   activePriority: Priority;
   sortBy: SortOption;
   sortDirection: SortDirection;
 }
 
-/**
- * Application state
- */
+// Application state
 export interface AppState {
   columns: Record<TokenCategory, ColumnState>;
   selectedToken: Token | null;

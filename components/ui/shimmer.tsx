@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
 
-/**
- * Shimmer loading effect component
- * Used for progressive loading states
- */
+// Shimmer loading effect component
+// Used for progressive loading states
 export function Shimmer({ className }: { className?: string }) {
   return (
     <div
@@ -15,4 +13,3 @@ export function Shimmer({ className }: { className?: string }) {
     />
   );
 }
-

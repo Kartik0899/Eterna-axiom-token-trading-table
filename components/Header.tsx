@@ -16,15 +16,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "./ui/drawer";
+import { SearchDialog } from "./SearchDialog";
 import { cn } from "@/lib/utils";
 
-/**
- * Header component - Main navigation and controls
- * Features: Logo, navigation menu, search, network selector, auth buttons
- * Responsive: Scrollable nav on tablet, hamburger menu on mobile
- */
 const Header = memo(() => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const navItems = [
     "Discover",
@@ -40,7 +37,7 @@ const Header = memo(() => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
-        {/* Left Section - Logo and Navigation */}
+        {/* Left Section */}
         <div className="flex items-center gap-4 md:gap-8">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 bg-primary rounded-sm" />
@@ -64,18 +61,21 @@ const Header = memo(() => {
           </nav>
         </div>
 
-        {/* Right Section - Search, Network, Auth */}
+        {/* Right Section */}
         <div className="flex items-center gap-2 md:gap-4">
-          {/* Search - Hidden on mobile */}
           <Button
             variant="ghost"
             size="icon"
-            className="h-9 w-9 hidden sm:flex"
+            className="h-9 w-9"
+            onClick={() => setSearchOpen(true)}
           >
             <Search className="h-4 w-4" />
           </Button>
 
-          {/* Network Selector - Hidden on mobile */}
+          {/* Search Dialog */}
+          <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+
+          {/* Network Selector */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="h-9 hidden sm:flex">

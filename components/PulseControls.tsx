@@ -32,25 +32,21 @@ import {
 } from "./ui/tooltip";
 import { cn } from "@/lib/utils";
 
-/**
- * PulseControls component - Controls bar for the Pulse page
- * Features: Pulse title, network logos, display settings, and action buttons
- * Responsive: On mobile, right controls are wrapped in an accordion
- */
+// PulseControls component
+
 const PulseControls = memo(() => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <div className="mb-6 md:flex md:items-center md:justify-between">
-      {/* Top Row - Always visible */}
       <div className="flex items-center justify-between mb-2 md:mb-0">
-        {/* Left Section - Pulse Title and Network Logos */}
+        {/* Left Section */}
         <div className="flex items-center gap-3">
           <h1 className="text-xl md:text-2xl font-bold text-foreground">
             Pulse
           </h1>
 
-          {/* Solana Logo - Circular icon with three horizontal gradient bars */}
+          {/* Solana Logo */}
           <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-background border border-border/50 flex items-center justify-center gap-0.5 p-1 rotate-90">
             <div className="h-2 md:h-2.5 w-[1.5px] bg-linear-to-b from-teal-400 via-blue-400 to-purple-400 rounded-full" />
             <div className="h-2 md:h-2.5 w-[1.5px] bg-linear-to-b from-teal-400 via-blue-400 to-purple-400 rounded-full" />
@@ -87,7 +83,6 @@ const PulseControls = memo(() => {
       {/* Desktop: Always visible */}
       <div className="hidden md:flex items-center justify-end gap-2">
         <TooltipProvider>
-          {/* Help/Question Mark Icon */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="h-9 w-9">
@@ -99,7 +94,6 @@ const PulseControls = memo(() => {
             </TooltipContent>
           </Tooltip>
 
-          {/* Display Dropdown Button */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="h-9 gap-2 px-3">
@@ -115,7 +109,6 @@ const PulseControls = memo(() => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Bookmark X Icon */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="h-9 w-9">
@@ -127,7 +120,6 @@ const PulseControls = memo(() => {
             </TooltipContent>
           </Tooltip>
 
-          {/* Grid Icon */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="h-9 w-9">
@@ -139,7 +131,6 @@ const PulseControls = memo(() => {
             </TooltipContent>
           </Tooltip>
 
-          {/* Volume/Speaker Icon */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="h-9 w-9">
@@ -151,7 +142,6 @@ const PulseControls = memo(() => {
             </TooltipContent>
           </Tooltip>
 
-          {/* Crosshair with Settings Icon Overlay */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="h-9 w-9 relative">
@@ -166,13 +156,11 @@ const PulseControls = memo(() => {
             </TooltipContent>
           </Tooltip>
 
-          {/* Wallet Button with Solana Logo */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="h-9 gap-2 px-3">
                 <Wallet className="h-4 w-4" />
                 <span className="text-sm">1</span>
-                {/* Solana Logo - Three horizontal gradient bars */}
                 <div className="flex items-center gap-0.5 ml-1">
                   <div className="h-2.5 w-[2px] bg-linear-to-b from-teal-400 via-blue-400 to-purple-400 rounded-full" />
                   <div className="h-2.5 w-[2px] bg-linear-to-b from-teal-400 via-blue-400 to-purple-400 rounded-full" />
@@ -200,7 +188,6 @@ const PulseControls = memo(() => {
       >
         <div className="flex flex-wrap items-center gap-2 pt-2">
           <TooltipProvider>
-            {/* Display Dropdown Button */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -220,7 +207,6 @@ const PulseControls = memo(() => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Bookmark X Icon */}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -232,7 +218,6 @@ const PulseControls = memo(() => {
               </TooltipContent>
             </Tooltip>
 
-            {/* Crosshair with Settings Icon */}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -251,7 +236,6 @@ const PulseControls = memo(() => {
               </TooltipContent>
             </Tooltip>
 
-            {/* Volume/Speaker Icon */}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -263,7 +247,6 @@ const PulseControls = memo(() => {
               </TooltipContent>
             </Tooltip>
 
-            {/* Help/Question Mark Icon */}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -275,7 +258,6 @@ const PulseControls = memo(() => {
               </TooltipContent>
             </Tooltip>
 
-            {/* Filter Button */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
